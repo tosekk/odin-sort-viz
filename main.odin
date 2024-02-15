@@ -1,24 +1,29 @@
 package main
 
 import "core:fmt"
-import "core:slice"
+
+import rl "vendor:raylib"
+
+import "algos"
 
 
 main :: proc() {
-    unsorted := [?]i32{12, 65, 11, 24, 37, 9}
+    screenWidth: i32 = 800
+    screenHeight: i32 = 450
+    windowTitle: cstring = "Sorting algorithms visualizer"
 
-    // selection_sort_recursive(unsorted[:], 0)
-    bubble_sort_recursive(unsorted[:])
+    rl.InitWindow(screenWidth, screenHeight, windowTitle)
 
-    fmt.println(unsorted)
-}
+    rl.SetTargetFPS(60)
 
-min_index :: proc(arr: []i32, i: int, j: int) -> int {
-    if i == j {
-        return i
+    for !rl.WindowShouldClose() {
+        rl.BeginDrawing()
+            rl.ClearBackground(rl.RAYWHITE)
+            rl.DrawText("Congrats! You created your first window!", 190, 200, 20, rl.LIGHTGRAY)
+
+            rl.DrawRectangle(0, 250, 100, 200, rl.BLUE)
+        rl.EndDrawing()
     }
 
-    k: int = min_index(arr, i + 1, j)
-
-    return arr[i] < arr[k] ? i : k
+    rl.CloseWindow()
 }
